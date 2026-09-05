@@ -1,4 +1,3 @@
-
 export async function POST(req) {
   try {
     const { message } = await req.json();
@@ -6,23 +5,38 @@ export async function POST(req) {
     const response = await fetch(
       "https://agentrouter.org/v1/chat/completions",
       {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${process.env.AGENTROUTER_KEY}`,
-          "Content-Type": "application/json"
+        method:"POST",
+        headers:{
+          "Authorization":`Bearer ${process.env.AGENTROUTER_KEY}`,
+          "Content-Type":"application/json"
         },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [
-            { role:"system", content:"You are ADIN AI, a friendly coding assistant." },
-            { role:"user", content:message }
+        body:JSON.stringify({
+          model:"deepseek-v4-flash",
+          messages:[
+            {
+              role:"system",
+              content:"Kamu adalah ADIN AI coding assistant."
+            },
+            {
+              role:"user",
+              content:message
+            }
           ]
         })
       }
     );
 
-    return Response.json(await response.json());
-  } catch(e) {
-    return Response.json({error:e.message},{status:500});
+    const data = await response.json();
+
+    console.log(data);
+
+    return Response.json(data);
+
+  } catch(error){
+    return Response.json({
+      error:error.message
+    },{
+      status:500
+    });
   }
 }
