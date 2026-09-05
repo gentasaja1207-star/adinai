@@ -1,9 +1,0 @@
-ADIN AI FEATURES
-
-- Animated 3D avatar support
-- Chat memory ready
-- User login ready
-- Conversation database ready
-- File upload ready
-- Coding assistant mode
-- AgentRouter API integration
